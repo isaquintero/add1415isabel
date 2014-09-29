@@ -1,0 +1,83 @@
+<html>
+<head>
+	<title>T&iacute;tulo del trabajo</title>
+</head>
+<body>
+<div style='display:table-row; padding: 10px;'>
+  <div style='float: left; width=20%; padding:10px;'>
+  <img src='./files/logo.png'/>
+  </div>
+  <div style='float: left;padding:10px'>
+  <ul>
+    <li><b>M&oacute;dulo:</b> <i>Administraci&oacute;n de Sistemas Operativos</i></li>
+    <li><b>T&iacute;tulo del trabajo</b> <i>Clientes ligeros con LTSP</i></li>
+    <li><b>Componentes del grupo:</b> <i>Isabel Quintero S&aacute;nchez</i></li>
+    <li><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></li>
+    <li><b>Fecha de entrega:</b> <i>29 de Septiembre de 2014</i></li>
+  </ul>
+  </div>
+</div>
+<div style='float: clear;background-color: #eeeeee; border:2px solid; border-radius:10px; padding: 10px;'>
+<a href='#bloque1'>Servidor LTSP</a> | <a href='#bloque2'>Preparar MV Cliente</a>
+<h1><a id='bloque1'>Servidor LTSP</a></h1>
+
+<p><b>Preparar la MV Server</b></p>
+
+<p>La MV del servidor necesitar&aacute; dos interfaces de red</p>
+
+    <li>Una externa: para comunicarse con Internet.
+        Configurarla en VBox como adaptador puente.
+        IP est&aacute;tica 172.16.108.XX</li>
+    <li>Una interna: para conectarse con los clientes ligeros.
+        La IP de esta interfaz de red debe ser est&aacute;tica y debe estar en la misma red que los clientes (IP 192.168.0.1).
+        Configurarla en VBox como "red interna".</li></p>   
+        <img src="./files/1ADD.png"/>
+     
+<p><b>Instalaci&oacute;n del SO</b></p>
+
+<p>
+    <li>Instalar un SO GNU/Linux en la MV.</li><br>
+    <li>Nombre de usuario: nombre-del-alumno, en min&uacute;sculas, sin tildes ni eñes. Poner como clave el DNI con la letra en min&uacute;sculas.</li><br>
+   <li> Clave de root, poner como clave el DNI con la letra en min&uacute;sculas.</li><br>
+   <li> Poner como nombre de equipo el primer apellido del alumno en min&uacute;sculas y sin tildes.</li><br>
+    <li>Poner como nombre de dominio el segundo apellido del alumno en min&uacute;sculas y sin tildes.</li><br>
+    
+    Todo este paso est&aacute; explicado en el primer v&iacute;deo subido en el repositoro de Git, hecho paso por paso.
+</p>
+
+<p>Luego, creamos 3 usuarios locales llamados:
+
+   <li>quintero-alumno1</li>
+   <li>quintero-alumno2</li>
+   <li>quintero-alumno3.</li>
+</p>
+<img src="./files/6ADD.png"/>
+<img src="./files/7ADD.png"/>
+<img src="./files/8ADD.png"/>
+
+<p>Instalar el servicio LTSP</p>
+
+<p><li>Instalamos el servidor de clientes ligeros, en el caso de Debian/Ubuntu, utilizamos los comandos:</li>
+        <b><i>apt-get install ltsp-server-standalone, 
+        ltsp-build-client</i></b></p>
+   <p><li>Instalamos el servidor SSH:</li></p> 
+        <b><i>apt-get install openssh-server</i></b>
+   <p><li>Revisar la configuraci&oacute;n de la tarjeta de red interna del servidor. IP est&aacute;tica compatible con la configuraci&oacute;n dhcp <b><i>(/etc/ltsp/dhcpd.conf).</i></b></li></p> 
+  <img src="./files/9ADD.png"/> 
+ </p> 
+  <h1><a id='bloque2'>Preparar MV Cliente</a></h1>
+  
+  <p>Crear la MV cliente:
+
+   <li> Sin disco duro y sin unidad de DVD.</li>
+   <li> S&oacute;lo tiene RAM, flopy.</li>
+   <li> Tarjeta de red PXE en modo "red interna".</li>
+    <img src="./files/10ADD.png"/> 
+     <img src="./files/4ADD.png"/> 
+     
+     <p>Finalmente, encendemos la MV cliente y comprobamos que todo funciona correctamente, se ver&aacute; el funcionamiento en el v&iacute;deo subido al repositorio Git.</p>
+   
+
+</p>
+</body>
+</html>
