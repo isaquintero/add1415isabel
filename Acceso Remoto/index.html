@@ -1,0 +1,137 @@
+<html>
+<head>
+	<title>T&iacute;tulo del trabajo</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+</head>
+<body>
+<div style='display:table-row; padding: 10px;'>
+  <div style='float: left; width=20%; padding:10px;'>
+  <img src='./files/logo.png'/>
+  </div>
+  <div style='float: left;padding:10px'>
+  <ul>
+    <li><b>M&oacute;dulo:</b> <i>Aministración Sistemas Operativos</i></li>
+    <li><b>T&iacute;tulo del trabajo</b> <i>Acceso Remoto</i></li>
+    <li><b>Componentes del grupo:</b> <i>Isabel Quintero Sánchez</i></li>
+    <li><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></li>
+    <li><b>Fecha de entrega:</b> <i>1 de Enero de 2014</i></li>
+  </ul>
+  </div>
+</div>
+<div style='float: clear;background-color: #eeeeee; border:2px solid; border-radius:10px; padding: 10px;'>
+<a href='#bloque1'>Introducción</a> | <a href='#bloque2'>Escritorio remoto con VNC</a> | <a href='#final'>Escritorio Remoto con RDP</a> |
+<a href='#bloque3'>Servidor de Terminales</a> | <a href='#bloque4'>Aplicaciones remotas mediante RemoteApp</a></div>
+
+<h1><a id='bloque1'>Introducción</a></h1>
+
+<p>Las máquinas virtuales que vamos a utilizar son:</p>
+<li>Windows 7.</li>
+<li>Windows 2008 Server.</li>
+<li>GNU/Linux Lubuntu.</li>
+<p>Debemos poner las MV en "modo puente". Las máquinas que actuen de servidor o aquellas a las que nos vamos a conectar de forma repetida deben tener IP estática.
+Las IP's que podemos usar son (si somos el alumno del puesto XX):</p>
+
+<li>172.16.108.XX</li>
+<li>172.16.108.1XX: Usar esta IP para los servidores Windows</li>
+<li>172.16.108.2XX: Usar esta IP para los servidores GNU/Linux</li>
+
+  <img src="./files/2.png"/>
+  <img src="./files/8.png"/>
+  <img src="./files/15.png"/>
+
+<h1><a id='bloque2'>Escritorio remoto con VNC</a></h1>
+
+<p>Accedemos a la MV de Windows 7 e instalamos y configuramos VNC para poder acceder a una máquina remota.</p>
+
+<img src="./files/3.png"/>
+
+<p>Luego hacemos la instalación en Windows 2008 Server.</p>
+
+<img src="./files/4.png"/>
+<img src="./files/5.png"/>
+<img src="./files/7.png"/>
+
+<p>Y, finalmente lo instalamos en GNU/Linux Lubuntu para hacer todos los pasos requeridos en la práctica.</p>
+
+<img src="./files/16.png"/>
+
+<p>Una vez instalado, debemos probar las conexiones entre:</p>
+
+<li><b>Windows 7 - Windows 2008 Server.</b></li><br>
+
+<img width="50%" src="./files/13.png"/><br>
+
+<li><b>Acceder a Windows desde Linux.</b></li><br>
+<img width="50%" src="./files/18.png"/><br>
+
+<li><b>Acceder a Linux desde Linux.</b></li><br>
+<img width="50%" src="./files/19.png"/><br>
+
+<li><b>Acceder a Linux desde Windows.</b></li><br>
+<img width="50%" src="./files/17.png"/><br>
+
+
+<h1><a id='final'>Escritorio Remoto con RDP.</a></h1>
+
+<p>En este caso, no hay que instalar nada, puesto que las versiones actuales de Windows ya vienen con el software de escritorio remoto preinstalado. Debemos configurar escritorio remoto 
+para poder acceder a otra máquina (Panel de control -> Sistema -> Configuración de Acceso Remoto).</p>
+
+<img src="./files/20.png"/>
+<img src="./files/22.png"/>
+
+
+<p>Probamos las conexiones remotas:
+
+<li><b>Acceder a Windows Server 2008 - desde Windows7:</b></li><br>
+
+<img src="./files/21.png"/>
+<img width="50%"src="./files/23.png"/><br>
+
+<li><b>Accedemos a Windows Server 2008 - desde Linux: </b>en este caso debemos instalar el paquete remina a través del comando <i>apt-get install remina</i>.</li><br>
+
+<img src="./files/24.png"/>
+<img width="50%"src="./files/25.png"/><br>
+
+<li><b>Acceder a Linux - desde Windows:</b> debemos instalar xrdp a través del comando <i>apt-get install xrdp</i>. En este caso, la conexión no funciona.</li><br>
+
+<img src="./files/26.png"/>
+<img width="50%" src="./files/27.png"/>
+
+<h1><a id='bloque3'>Servidor de Terminales.</a></h1>
+
+<p>Necesitamos una MV con Windows Server que NO sea controlador de dominio.En W2k8server RC2, Terminal Service tiene un nombre diferente. 
+Para instalarlo, entro en funciones y agrego la función TS.</p>
+
+<img src="./files/28.png"/>
+<img width="15%" src="./files/29.png"/>
+<img src="./files/30.png"/>
+
+<p>Creamos dos usuarios locales y los unimos al grupos de acceso remoto.</p>
+
+<img src="./files/31.png"/>
+<img width="25%" src="./files/32.png"/>
+
+<p>Finalmente, probamos la conexión remota de escritorio RDP, desde el cliente Windows hacia el servidor Windows Server.</p>
+<img src="./files/33.png"/>
+
+<h1><a id='bloque4'>Aplicaciones remotas mediante RemoteApp.</a></h1>
+
+<p>
+<ul><li>En las configuraciones usar las IP's de las máquinas y no su nombre NETBIOS.</li></ul>
+<ul><li>No configurar Puerta de Enlace TS.</li></ul>
+<ul><li>No usar certificados.</li></ul></p>
+
+<img src="./files/34.png"/>
+<img src="./files/35.png"/>
+<img src="./files/36.png"/>
+<img src="./files/37.png"/>
+
+<p>Lo había intentado con el Wordpad, pero luego lo terminé con la calculadora.</p>
+
+
+
+
+
+</body>
+</html>
