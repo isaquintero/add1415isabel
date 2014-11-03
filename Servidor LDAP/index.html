@@ -1,0 +1,100 @@
+<html>
+<head>
+	<title>T&iacute;tulo del trabajo</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+</head>
+<body>
+<div style='display:table-row; padding: 10px;'>
+  <div style='float: left; width=20%; padding:10px;'>
+  <img src='./files/logo.png'/>
+  </div>
+  <div style='float: left;padding:10px'>
+  <ul>
+    <li><b>M&oacute;dulo:</b> <i>Administración de Sistemas Operativos</i></li>
+    <li><b>T&iacute;tulo del trabajo</b> <i>Servidor LDAP</i></li>
+    <li><b>Componentes del grupo:</b> <i>Isabel Quintero Sánchez</i></li>
+    <li><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></li>
+    <li><b>Fecha de entrega:</b> <i>3 de Noviembre de 2014</i></li>
+  </ul>
+  </div>
+</div>
+<div style='float: clear;background-color: #eeeeee; border:2px solid; border-radius:10px; padding: 10px;'>
+<a href='#bloque1'>1.Instalación del Servidor LDAP</a> | <a href='#bloque2'>2. Introducir datos en LDAP</a>
+
+<h1><a id='bloque1'>1.Instalación del Servidor LDAP</a></h1>
+
+<p><b>Preparar la MV Lubuntu</b></p>
+
+<p>En primer lugar, configuramos la máquina con IP estática, utilizaremos las IP's con las que disponemos, en este caso "172.16.108.16".</p>  
+        <img src="./files/1.png"/>
+        
+<p>Seguidamente, procedemos a la instalación del servidor LDAP mediante el comando "apt-get install slapd ldap-utils db5.3-util",una vez instalado, lanzaremos
+ el asistente de configuración de slapd mediante el comando "dpkg-reconfigure slapd", y dará comienzo.</p>  
+ 
+ <p>Usaremos como DN el siguiente: dc=nombredealumno, dc=aula109. Y, definiremos una contraseña.</p> 
+ <img src="./files/3.png"/>
+ <img src="./files/2.png"/>
+ 
+ <p>Acto seguido nos informará sobre los posibles gestores de datos para almacenar el directorio y en la siguiente ventana nos preguntará qué sistema utilizar.Lo 
+ recomendable es utilizar els istema BDB.</p>
+ <img src="./files/5.png"/>
+   
+ <p>Luego, nos preguntará si quiere eliminar la base de datos y, si queremos mover la base de datos antigua, le daremos a la opción "No".</p>
+  <img src="./files/6.png"/>
+   <img src="./files/7.png"/>
+   
+  <p>Permitir el protocolo LDAPv2, "no"</p>
+   <img src="./files/8.png"/>
+   
+<p>Una vez configurado "sladp", nos aseguramos que tenemos definido el nombre DNS de la máquina "isabel.aula109" en el fichero /etc/hosts.</p>
+<img src="./files/9.png"/>
+
+<p>Una vez instalado, comprobar a parar y reiniciar el servicio de forma manual.</p>
+<img src="./files/10.png"/>
+<img src="./files/11.png"/>
+
+<p>Comprobamos también que el servicio se inicia automáticamente al reiniciar la máquina tras el comando que aparece en la captura de pantalla.</p>
+<img src="./files/12.png"/>
+
+<p>Finalmente, instalamos alguna de las herramientas cliente LDAP propuestas en la documentación.</p>
+<img src="./files/13.png"/>
+
+
+  <h1><a id='bloque2'>2. Introducir datos en LDAP</a></h1>
+  
+  <p>Una vez terminada la instalación, entramos en "localhost/phpldapadmin" y comprobamos que funciona correctamente.</p>
+    <img src="./files/14.png"/> 
+    
+   <p>Ponemos el DN y la contraseña definidos anteriormente para poder entrar.</p>
+     <img src="./files/15.png"/> 
+     
+     <p>Luego, debemos entrar al fichero de configuración "/etc/phpldapadmin/config.php" y cambiar varias líneas para que en la página de inicio entre con nuestro nombre definido anteriormente.</p>
+    <img src="./files/16.png"/> 
+     <img src="./files/17.png"/> 
+      <img src="./files/18.png"/> 
+       <img src="./files/19.png"/> 
+       
+      <p>Una vez dentro, creamos las unidades organizativas: "grupos" y "usuarios".</p>
+       <img src="./files/20.png"/> 
+        <img src="./files/21.png"/> 
+        
+       <p>Dentro de ou=grupos,creamos los grupos de "profesores" y "alumnos".</p>
+        <img src="./files/22.png"/> 
+        <img src="./files/23.png"/> 
+        
+       <p>Dentro de ou=usuarios,creamos varios usuarios "profesores" y "alumnos". Al principio, no nos dejaba crear los usuario, por lo que tuvimos que editar un fichero de configuración y cambiar lo que nos 
+       indica la captura de pantalla.</p>
+       <img src="./files/25.png"/> 
+        <img src="./files/24.png"/> 
+       <img src="./files/26.png"/> 
+       
+       <p>Finalmente, todo lo que hemos creado, quedaría así:</p>
+	<img src="./files/27.png"/>
+	
+	<p>Para terminar, encendemos otra máquina virtual e instalamos el "jxplorer" y comprobamos que podemos acceder al contenido de LDAP.</p> 
+	<img src="./files/28.png"/> 
+        <img src="./files/29.png"/> 
+        
+
+</body>
+</html>
