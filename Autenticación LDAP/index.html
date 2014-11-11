@@ -1,0 +1,107 @@
+<html>
+<head>
+	<title>T&iacute;tulo del trabajo</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+</head>
+<body>
+<div style='display:table-row; padding: 10px;'>
+  <div style='float: left; width=20%; padding:10px;'>
+  <img src='./files/logo.png'/>
+  </div>
+  <div style='float: left;padding:10px'>
+  <ul>
+    <li><b>M&oacute;dulo:</b> <i>Aministración Sistemas Operativos</i></li>
+    <li><b>T&iacute;tulo del trabajo</b> <i> Autenticación LDAP</i></li>
+    <li><b>Componentes del grupo:</b> <i>Isabel Quintero Sánchez</i></li>
+    <li><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></li>
+    <li><b>Fecha de entrega:</b> <i>10 de Noviembre de 2014</i></li>
+  </ul>
+  </div>
+</div>
+<div style='float: clear;background-color: #eeeeee; border:2px solid; border-radius:10px; padding: 10px;'>
+<a href='#bloque1'>Instalación de los paquetes.</a> | <a href='#bloque2'>Configuración de las librerías</a> | <a href='#final'>Configurar el fichero "nsswitch.conf".</a> |
+<a href='#bloque3'>Configuración del archivo common-auth.</a> | <a href='#bloque4'>Configuración del archivo common-account.</a> | <a href='#bloque5'>Configuración del archivo common-session.</a>
+| <a href='#bloque6'>Configuración del archivo common-password.</a> | <a href='#bloque7'>Crear el directorio HOME al iniciar sesión.</a> </div>
+
+<h1><a id='bloque1'>Instalación de los paquetes.</a></h1>
+
+<p>Instalamos el paquete <i>"libpam-ldap"</i> ejecutando el comando: <b>apt-get install libpam-ldap</b>.</p>
+<p>Indicamos la URI o dirección para acceder al servidor LDAP. Si no especificamos el puerto, cogerá el puerto por defecto 389.</p>
+ <img src="./files/1.png"/>
+
+<p>Especificamos la base del directorio LDAP (baseDN).</p>
+ <img src="./files/2.png"/>
+
+<p>Indicamos “Sí”, de forma que el usuario “root” podrá cambiar las contraseñas de los usuarios del directorio LDAP del mismo
+modo en que cambia las contraseñas de los usuarios locales. En mi captura sale la opción que "no", y como no funcionaba, volví a instalarlo y 
+finalmente le di a que "sí" pero me olvidé de hacer captura.</p>
+ <img src="./files/3.png"/>
+ 
+ <p>Indicamos la cuenta del administrador del servidor LDAP, de forma que los cambios de contraseña realizados por el administrador
+del sistema “root” se puedan actualizar en el directorio LDAP.</p>
+<img src="./files/4.png"/>
+
+<p>Indicamos la contraseña del administrador del directorio LDAP.</p>
+<img src="./files/5.png"/>
+
+
+<h1><a id='bloque2'>Configuración de las librerías</a></h1>
+
+
+<p>Entramos en el fichero de configuración <i>"/etc/ldap.conf"</i>. Primero, habilitamos el host y ponemos la ip del servidor.</p>
+<img src="./files/6.png"/>
+
+<p>Habilitamos la línea del puerto 389.</p>
+<img src="./files/7.png"/>
+
+<p>Y, las unidades organizativas donde encontrar las cuentas de los usuarios, las contraseñas y los grupos, y los editamos según los hemos creado anteriormente.</p>
+<img src="./files/8.png"/>
+
+<h1><a id='final'>Configurar el fichero "nsswitch.conf".</a></h1>
+
+<p>Para que el servidor LDAP actúe como si se tratara de los archivos "/etc/passwd", "/etc/group" y "/etc/shadow", además de instalar las librerías anteriores, debemos indicar que se utilice 
+LDAP como alternativa para autentificar usuarios. Para ello hay que añadir en el archivo "/etc/nsswitch.conf", exactamente en las líneas que hacen referencia a “passwd”, “group” y
+“shadow”, la palabra ldap tras la palabra compat quedando el archivo "/etc/nsswitch.conf" así: </p>
+
+<img src="./files/9.png"/>
+
+<h1><a id='bloque3'>Configuración del archivo common-auth.</a></h1>
+
+<p>Para que los servicios de nuestro sistema utilicen las librerías pam-ldap para autentificar al usuario, debemos añadir en el archivo
+"/etc/pam.d/common-auth" la siguiente línea, justo encima de la línea "pam_unix.so".</p>
+
+<img src="./files/10.png"/>
+
+<h1><a id='bloque4'>Configuración del archivo common-account.</a></h1>
+
+<p>Para permitir que los servicios de nuestro sistema comprueben la cuenta del usuario mediante las librerías pam-ldap, debemos
+añadir en el archivo "/etc/pam.d/common-account" la siguiente línea justo encima de la línea "pam_unix.so":</p>
+
+<img src="./files/11.png"/>
+
+<h1><a id='bloque5'>Configuración del archivo common-session.</a></h1>
+
+<p>Para permitir que los servicios de nuestro sistema obtengan los parámetros de la sesión de usuario mediante las librerías pam-
+ldap, debemos añadir en el archivo "/etc/pam.d/common-session" la siguiente línea encima de la línea "pam_unix.so":</p>
+
+<img src="./files/12.png"/>
+
+
+<h1><a id='bloque6'>Configuración del archivo common-password.</a></h1>
+
+<p>Para permitir que los servicios de nuestro sistema puedan modificar la contraseña del usuario mediante las librerías pam-ldap,
+debemos añadir en el archivo "/etc/pam.d/common-password" la siguiente línea encima de la línea "pam_unix.so":</p>
+
+<img src="./files/13.png"/>
+
+<h1><a id='bloque7'>Crear el directorio HOME al iniciar sesión.</a></h1>
+
+<p>Finalmente, añadimos al final del fichero "/etc/pam.d/common-session" la siguiente línea: <i>"session required pam_mkhomedir.so skel=/etc/skel umask=0022"</i>.
+De esta forma, cuando un usuario inicie sesión y no disponga de directorio HOME, se creará a partir de los ficheros /etc/skel (skel=/etc/skel) y con los permisos rw-rw-r- (umask=0022).</p>
+
+<img src="./files/14.png"/>
+
+<p>No hacemos la comprobación porque la máquina virtual no ha funcionado y se queda la práctica como está.</p>
+</body>
+</html>
