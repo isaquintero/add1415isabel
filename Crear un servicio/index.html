@@ -1,0 +1,72 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>SSH</title>
+</head>
+<body>
+<div style='display:table-row; padding: 10px;'>
+  <div style='float: left; width=20%; padding:10px;'>
+  <img src='./files/logo.png'/>
+  </div>
+  <div style='float: left;padding:10px'>
+  <ul>
+    <li><b>M&oacute;dulo:</b> <i>Administración de Sistemas Operativos</i></li>
+    <li><b>T&iacute;tulo del trabajo</b> <i>Crear un servicio</i></li>
+    <li><b>Componentes del grupo:</b> <i>Isabel Quintero Sánchez</i></li>
+    <li><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></li>
+    <li><b>Fecha de entrega:</b> <i>24 de Noviembre de 2014</i></li>
+  </ul>
+  </div>
+</div>
+<div style='float: clear;background-color: #eeeeee; border:2px solid; border-radius:10px; padding: 10px;'>
+<a href='#bloque1'>1.  System V.</a> | <a href='#bloque2'>2. Upstart.</a> 
+</div>
+
+<a id='bloque1'/><h1>1. System V.</h1>
+
+<p>Iniciamos el SO instalado con anterioridad (Debian 7) y creamos la carpeta "/etc/kup"  y el fichero vacío "/etc/kup/kup.log".</p>
+
+<img src='./files/1.png'/><br/>
+<img src='./files/2.png'/><br/>
+
+<p><b>Script demonio.</b></p>
+
+<p>Creamos un script (/usr/local/bin/kupd) que será nuestro demonio. Este script será un bucle que ejecutará una tarea de forma repetitiva. En mi caso, utilicé el ejemplo escrito en Ruby. </p>
+
+<img src='./files/3.png'/>
+
+<p>Le damos permisos de ejecución y comprobamos su funcionamiento.</p>
+
+<img src='./files/4.png'/>
+<img src='./files/5.png'/>
+
+<p> Ejecutamos el siguiente comando: "cat /etc/kup/kup.log", para ver los mensajes que aparecen cada intervalo de tiempo.</p>
+<img src='./files/6.png'/>
+
+<p>Y, finalmente, paramos el servicio con el siguiente comando: "rm /etc/kup/running".</p>
+<img src='./files/7.png'/>
+
+
+<p><b>Script de control.</b></p>
+
+<p>Ahora crear un script "/etc/init.d/kup", será un script que controlará el inicio/parada de nuestro demonio, al estilo System V. En el que utilizaremos el ejemplo escrito en Ruby.</p>
+
+<img src='./files/8.png'/>
+
+<p>Le damos permisos de ejecución y probamos que el guión funciona correctamente mediante el comando: "/etc/init.d/kup [start|stop|status]".</p>
+
+<img src='./files/9.png'/>
+<img src='./files/10.png'/>
+
+
+<a id='bloque2'/><h2>2. Upstart.</h2>
+
+<p>Ahora vamos a configurar el servicio, al estilo Upstart.</p>
+<p>Creamos un fichero "/etc/init/kup2.conf" con el contenido que nos proporciona la práctica: </p>
+
+<img src='./files/11.png'/>
+
+<p>El siguiente punto, sería descargarnos mediante el comando "apt-get install upstart", el paquete Upstart. En este caso, me da un error y me es imposible descargarlo, por lo que entrego la práctica hecha
+hasta ese punto.</p>
+</body>
+</html>
