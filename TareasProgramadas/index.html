@@ -1,0 +1,92 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>T&iacute;tulo del trabajo</title>
+</head>
+<body>
+<div style='display:table-row; padding: 10px;'>
+  <div style='float: left; width=20%; padding:10px;'>
+  <img src='./files/logo.png'/>
+  </div>
+  <div style='float: left;padding:10px'>
+  <ul>
+    <li><b>M&oacute;dulo:</b> <i>Administración de Sistemas Operativos</i></li>
+    <li><b>T&iacute;tulo del trabajo</b> <i>Tareas Programadas.</i></li>
+    <li><b>Componentes del grupo:</b> <i>Isabel Quintero Sánchez.</i></li>
+    <li><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></li>
+    <li><b>Fecha de entrega:</b> <i>20 de Enero de 2015</i></li>
+  </ul>
+  </div>
+</div>
+<div style='float: clear;background-color: #eeeeee; border:2px solid; border-radius:10px; padding: 10px;'>
+<a href='#bloque1'>GNU/Linux</a> | <a href='#bloque2'>Windows</a> 
+</div>
+
+
+<h1><a id='bloque1'>GNU/Linux.</a></h1>
+
+<p>Para esta parte de la práctica utilizaremos una MV Lubuntu, donde realizaremos las tareas programadas que nos indica el enunciado.</p>
+
+<h3>Tarea programada diferida.</h3>
+
+<p>En primer lugar, programaremos una tarea diferida para el apagado automático de la máquina. Para ello, primero debemos instalar "at" mediante el comando
+"apt-get install at".</p>
+
+  <img src='./files/5.png'/>
+  
+  <p>Una vez instalado, indicaremos cuándo queremos que se realice la acción mediante el comando "at now" y luego, cuando entre al sistema pondremos el comando de apagado acompañado 
+  del tiempo en el que queramos que se apague la máquina(shutdown -h 1).</p>
+  
+    <img src='./files/7.png'/>
+    
+<h3>Tarea programada periódica.</h3>
+    
+<p>A continuación, crearemos una tarea programada periódica. Para ello, crearemos un fichero en el escritorio al que he llamado "prueba.log" para que quede registrada cada vez que se realice la 
+tarea que hemos programado. Para programar la tarea, utilizaremos el comanto "crontab -e" para crearla.</p>
+	<img src='./files/3.png'/>
+
+<p>Luego, al final de dicho fichero, crearemos la tarea: cada minuto (en la captura sale cada 30 minutos porque después lo cambié para que no lo hiciera muy a menudo), a todas horas, todos los días, 
+todos los meses, todos los días de la semana y la ruta del fichero que hemos creado anteriormente (prueba.log).</p>	
+	<img src='./files/13.png'/>
+	
+<h3>Tarea programada asíncrona.</h3>
+
+<p>Finalmente, crearemos una tarea asíncrona. Creamos un script con los datos que nos proporciona la práctica, dicho script lo copiamos a la carpeta "/etc/cron.daily".
+Una vez copiado, lo ejecutamos con el comando "anacron -n". Cuando creamos el script, debemos darle permisos para que nos deje ejecutarlo, esa acción se hace acción se hace a través
+del comando "chmod 777 script.sh".</p>
+	<img src='./files/1.png'/>
+	<img src='./files/8.png'/>
+
+
+<h1><a id='bloque2'>Windows.</a></h1>
+
+<p>Una vez terminada la parte de linux, pasamos a programar tareas en Windows, para ello utilizaremos una MV de Windows7.</p>
+
+<h3>Tarea programada diferida.</h3>
+
+<p>Empezaremos con una tarea diferida de ejecutar el apagado de la máquina. Vamos al "programador de tareas -> crear tarea" y la programamos según creamos conveniente, es decir, sólo una vez.</p>
+<p>Ponemos el comando de apagado y el tiempo en el que queramos que se apague la máquina.</p>
+<img width='35%' height='35%' src='./files/16.png'/>
+<img width='30%' height='30%'src='./files/17.png'/>
+<img src='./files/19.png'/>
+
+<h3>Tarea programada periódica.</h3>
+
+<p>A continuación, haremos una tarea periódica de mostrar un mensaje en pantalla, dicho mensaje lo programaremos para que salga cada 5 minutos, cada tres días a las 9.35.</p>
+<img width='30%' height='30%'src='./files/10.png'/>
+<img width='30%' height='30%'src='./files/12.png'/>
+<img width='25%' height='30%'src='./files/11.png'/>
+
+<h3>Tarea programada asíncrona.</h3>
+
+<p>Para acabar, realizaremos una tarea programada asíncrona. Que se realice semanalmente y que si no se ejecuta, reiniciarla cada 2 minutos.</p>
+<img src='./files/20.png'/>
+<img width='30%' height='30%'src='./files/18.png'/>
+
+<p>Elegimos la tarea que queremos que se realice, será la comprobación del disco en busca de errores ("chkdsk") y comprobamos que se realiza.</p>
+
+<img width='30%' height='30%'src='./files/22.png'/>
+<img width='30%' height='30%'src='./files/23.png'/>
+
+</body>
+</html>
