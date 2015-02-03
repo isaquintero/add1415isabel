@@ -1,0 +1,374 @@
+<html>
+<head>
+	<title>Gestor de Infraestructura - Efraín Hernández e Isabel Quintero.</title>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="./files/favicon.ico" />
+	<script src="./files/jquery-2.1.1.min.js"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="./files/bootstrap.min.css">
+	<link rel="stylesheet" href="./files/font-awesome.min.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="./files/bootstrap.min.js"></script>
+	<style type='text/css'>
+		body{
+			font-family: Arial;
+			background: url(./files/body.png) repeat;
+		}
+		#content{
+			width:980px;
+			margin:0 auto;
+			text-align:center;
+			background: url(./files/anillas.png) repeat;
+			padding-right:80px;
+			padding-left:80px;
+			padding-bottom:60px;
+		}
+		p{
+			font-size:12px;
+			text-align:justify;
+			margin:8px;
+		}
+		ul{
+			font-size:12px;
+			margin-left:5px;
+			text-align:justify;
+		}
+		img{
+			width:50%;
+			border:1px solid black;
+		}
+		img.logo{
+			width:auto;
+			border:0;
+		}
+		div.copyright{
+		width:50%;
+			background:grey;
+			text-align:center;
+			border-left:1px solid black;
+			border-right:1px solid black;
+			border-bottom:1px solid black;
+			border-top: 1px solid transparent;
+			margin: 0 auto;
+		}
+		div.copyright p{
+		margin:5px;
+		padding:0;
+		color:white;
+		font-family: Arial;
+		font-size:13px;
+		color:black;
+		text-align:center;
+		}
+		a{
+			text-decoration:none;
+			color:black;
+		}
+		a:hover{
+			color:black;
+			text-decoration:none;
+		}
+		h1{
+			background: #ccc;
+			padding:5px;
+			padding-left:20px;
+			border-left:8px solid black;
+			border-right:8px solid black;
+			border-bottom: 1px dotted gray;
+			border-top: 1px dotted gray;
+			text-align:left;
+			color:black;
+		}
+		h2{
+			background: #ccc;
+			padding:5px;
+			padding-left:50px;
+			border-left:8px solid gray;
+			border-right:8px solid gray;
+			border-bottom: 1px dotted gray;
+			border-top: 1px dotted gray;
+			text-align:left;
+			color:black;
+		}
+		p.significado{
+			padding:25px;
+			padding-left:90px;
+			border: 1px dotted black;
+			margin:20px;
+			margin-bottom: 35px;
+			position:relative;
+			text-align:justify;
+		}
+		p.significado img{
+			position:absolute;
+			
+			width:auto;
+			border:0;
+		}
+		p.significado:before{
+			content:"";
+			width:75px;
+			height:75px;
+			position:absolute;
+			background: url(./files/significado.png) no-repeat;
+			top:-5px;
+			left:-10px;
+		}
+		p.significado p{
+			display:none;
+		}
+		p.significado div{
+			display:none;
+		}
+		.f-nav{ z-index: 9999; position: fixed;top:0;margin: 0 auto; width:850px; margin-left:-15px;-moz-box-shadow: 0 0 5px 5px #888;
+-webkit-box-shadow: 0 0 5px 5px#888;
+box-shadow: 0 0 5px 5px #888;}
+		.scrolling {
+    margin-top:60px !important;
+}
+nav{
+	width:100%;
+}
+nav li:hover{
+	cursor:pointer;
+}
+
+.navbar-brand > img{
+	display:none;
+}
+
+.visible{
+	display:block;
+}
+.oculto{
+	display:none;
+}
+
+#autor{
+	display:none;
+}
+
+.bs-callout-info {
+	border-left:4px solid #5BC0DE;
+	border-right:4px solid #5BC0DE;
+}
+
+.list-group{
+	text-align:left;
+}
+#info{
+	padding-top:20px;
+	font-size:12px;
+}
+	</style>
+	<script type='text/javascript'>
+		$(function() {
+			$('img[class!="logo"]').after('<div class="copyright"><p>&copy;Foto: Imagen de Efraín e Isabel.</p></div>');
+				var nav = $('nav');
+					$(window).scroll(function () {
+					if ($(this).scrollTop() > 136) {
+					nav.addClass("f-nav");
+					$('.navbar-brand > img').css("display","block");
+					$('nav img').removeClass("oculto");
+					$('nav img').addClass("visible");
+					$('#autor').css("display","block");
+					} else {
+					$('.navbar-brand > img').css("display","none");
+					$('nav img').removeClass("visible");
+					$('nav img').addClass("oculto");
+					nav.removeClass("f-nav");
+					$("#content").removeClass("scrolling");
+					$('#autor').css("display","none");
+					}
+				});
+				$(function(){
+					$('a[href]').on('click',function(e){
+					$("#content").removeClass("scrolling");
+						e.preventDefault();
+						var strAncla=$(this).attr('href');
+						$('body,html').stop(true,true).animate({
+							scrollTop: $(strAncla).offset().top
+						},1000);
+						$("#content").addClass("scrolling");
+					});
+				}); 
+		});
+	</script>
+</head>
+<body>
+<div id='content'>
+<div class="row" id='info'>
+   <div class="col-xs-12 col-md-6"><img src='./files/logo.png' class='logo' style='margin-top:30px;'/></div>
+  <div class="col-xs-6 col-md-6"><div class="list-group">
+  <a href="#" class="list-group-item"><b>M&oacute;dulo:</b> <i>Administración de Sistemas Operativos</i></a>
+  <a href="#" class="list-group-item"><b>T&iacute;tulo del trabajo:</b> <i>Gestor de Infraestructura</i></a>
+  <a href="#" class="list-group-item"><b>Componentes del grupo:</b> <i>Efraín Hernández Morales e Isabel Quintero</i></a>
+  <a href="#" class="list-group-item"><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></a>
+  <a href="#" class="list-group-item"><b>Fecha de entrega:</b> <i>3 de Febrero de 2015</i></a>
+</div></div>
+</div>
+<nav class="navbar navbar-default bs-callout-info" role="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+	  <a class="navbar-brand" href="#">
+        <img alt="Brand" height='20px' width='20px' src="./files/logoMenu.png" class='logo'>
+      </a>
+		<li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">1. MASTER<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+			<li><a href="#bloque1">1.0 Introducción.</a></li>
+			<li><a href="#bloque2">1.1 Ejemplo manual.</a></li>
+			<li><a href="#bloque3">1.2 Primera versión del fichero pp.</a></li>
+          </ul>
+        </li>
+		<li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">2.Cliente 1<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+			<li><a href="#bloque4">2.0 Introducción</a></li>
+          </ul>
+        </li>
+        	<li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">3. Certificado<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+			<li><a href="#bloque5">3.0 Aceptar certificado.</a></li>
+			<li><a href="#bloque6">3.1 Comprobación final.</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">4. 2ª versión del fichero pp<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+			<li><a href="#bloque7">4.0 Introducción.</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">5. Cliente 2<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+			<li><a href="#bloque8">5.0 Introducción.</a></li>
+          </ul>
+        </li>
+      </ul>
+      
+	  <ul class="nav navbar-nav navbar-right" id='autor'>
+        <li><a href="#"><i class="fa fa-user"></i>Efraín e Isabel.</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id='anillas'>
+	
+<h1><a id='bloque1'>1. MASTER</a></h1>
+
+<p>Empezamos preparando las máquinas virtuales. Tenemos un master y cliente en entorno Debian y un segundo cliente en entorno Windows.</p>
+<img src='./files/1.png'/>
+
+<p>Vamos a la terminal del Master y entramos en el fichero de la configuración de interfaces de red ('/etc/network/interfaces'), asignándole una ip estática.</p>
+<img src='./files/2.png'/>
+
+<p>El siguiente paso es editar el archivo /etc/hostname indicándole que el nombre del equipo es "master.isaefra".</p>
+<img src='./files/6.png'/>
+
+<p>A continuación, añadimos las ip de los hosts clientes en el archivo /etc/hosts, quedando de la siguiente forma:</p>
+<img src='./files/9.png'/>
+<p>Hacemos la comprobación de que todos los pasos realizados anteriormente se han ejecutado correctamente.</p>
+<img src='./files/10.png'/>
+
+<h2><a id='bloque2'>1.1 Ejemplo manual</a></h2>
+
+<p>Antes de nada, instalamos el paquete tree desde la terminal mediante el comando "apt-get install tree".</p>
+<img src='./files/14.png'/>
+
+<p>Seguidamente, creamos el usuario "yoda".</p>
+<img src='./files/15.png'/>
+
+<p>Dentro de /home/yoda creamos la carpeta "tatooine"·</p>
+<img src='./files/16.png'/>
+
+<p>Luego, vamos a averiguar la configuración que lee puppet de estos recursos. Para ello ejecutamos los comandos siguientes (para realizar el último comando, debemos crear la carpeta "corusant"):</p>
+<img src='./files/17.png'/>
+
+<p>Comprobamos que el contenido del fichero yoda.pp sea el generado por el comando ejecutado anteriormente.</p>
+<img src='./files/18.png'/>
+
+<p>Por último, Desinstalar el paquete tree y eliminar la carpeta..</p>
+<img src='./files/19.png'/>
+<img src='./files/20.png'/>
+<p>Finalmente, ejecutamos el comando "puppet apply yoda.pp" y comprobamos los resultados: </p>
+<img src='./files/21.png'/>
+<h2><a id='bloque3'>1.2 Primera versión del fichero pp</a></h2>
+<p class="significado">Instalando y configurando Puppet en el master.</p>
+<p>Empezamos instalando el paquete puppetmaster en nuestra máquina.</p>
+<img src='./files/22.png'/>
+<p>A continuación, creamos las carpetas files y manifests en "/etc/puppet/". También creamos la carpeta "classes" en "/etc/puppet/manifests/". Además, creamos el archivo readme.txt en "/etc/puppet/files/". Seguidamente, también creamos el archivo "site.pp" en " /etc/puppet/manifests/". Y, por último, creamos el archivo "hostlinux1.pp" en "/etc/puppet/manifests/classes/". </p>
+<img src='./files/23.png'/>
+<p>El archivo "readme.txt" lo editamos de la siguiente forma:</p>
+<img src='./files/24.png'/>
+<p>El fichero "site.pp" lo rellenamos con el siguiente código:</p>
+<img src='./files/25.png'/>
+<p>Y, por último, el fichero "hostlinux1.pp" contiene la siguiente secuencia de código:</p>
+<img src='./files/26.png'/>
+<p>Reiniciamos el servicio: "/etc/init.d/puppetmaster restart" y consultamos log por si hay errores: "tail /var/log/syslog"</p>
+<img src='./files/27.png'/>
+<h1><a id='bloque4'>Cliente Puppet Debian</a></h1>
+<p class='significado'>Éste será nuestro client 1 de Puppet. Será un sistema operativo Debian.</p>
+<p>Comenzamos con los preparativos de la máquina virtual. Empezamos añadiéndole una ip estática.</p>
+<img src='./files/4.png'/>
+<p>Ahora, al /etc/hosts le añadimos las siguientes ip asociadas a sus dominios.</p>
+<img src='./files/7.png'/>
+<p>Por último, hacemos las pruebas de comando para ver si está todo correcto.</p>
+<img src='./files/11.png'/>
+<p>Tras comprobar que está todo en orden, procedemos a instalarle el paquete "puppet".</p>
+<img src='./files/28.png'/>
+<p>Añadimos a /etc/puppet/puppet.conf quién es el master.</p>
+<img src='./files/29.png'/>
+<p>Editamos el archivo /etc/default/puppet, y modificar la línea siguiente indicándole "START=yes".</p>
+<img src='./files/30.png'/>
+<p>Reiniciamos el servicio y comprobamos los log del cliente: tail /var/log/syslog.</p>
+<img src='./files/31.png'/>
+<h1><a id='bloque5'>3. Aceptar Certificado</a></h1>
+<p class="significado">Antes de que el master acepte a client1.isaefra, como cliente, se deben intercambiar los certificados.</p>
+<p>Vamos al master y consultamos las peticiones pendiente de unión al master:</p>
+<img src='./files/32.png'/>
+<p>Aceptamos al nuevo cliente desde el master:</p>
+<img src='./files/33.png'/>
+<h2><a id='bloque6'>3.1 Comprobación Final</a></h2>
+<p>Vamos al cliente 1 y antes que nada reiniciamos la máquina. Tras esto, ejecutamos comando para comprobar errores: "puppet agent --server master.nombregrupo --test"</p>
+<img src='./files/34.png'/>
+<p>Para ver errores podemos reiniciar el servicio puppet en el cliente, y consultar el archivo de log del cliente: tail /var/log/syslog.</p>
+<img src='./files/35.png'/>
+<h1><a id='bloque7'>4. Segunda versión del fichero pp</a></h1>
+<p class='significado'>Primero hemos probado una configuración sencilla en PuppetMaster. Ahora podemos pasar a algo más complejo como este apartado.</p>
+<p>Creamos el archivo "hostlinux2.pp" con el siguiente contenido: .</p>
+<img src='./files/37.png'/>
+<p class='significado'>Las órdenes de configuración de puppet significan lo siguiente:<ul>
+
+    <li><b>package:</b> indica paquetes que queremos que estén o no en el sistema.</li>
+    <li><b>group:</b> creación o eliminación de grupos.</li>
+    <li><b>user:</b> Creación o eliminación de usuarios.</li>
+    <li><b>file:</b> directorios o ficheros para crear o descargar desde servidor.</li></ul>
+</p>
+<p>Modificar site.pp con:</p>
+<img src='./files/38.png'/>
+<p>Tras esto, reiniciamos la máquina y probamos con un test.</p>
+<img src='./files/39.png'/>
+<h1><a id='bloque8'>5. Cliente puppet windows</a></h1>
+<p class='significado'>Enlace de interés: http://docs.puppetlabs.com/windows/writing.html</p>
+<p>Antes que nada configuramos la máquina windows añadiendole una ip estática: </p>
+<img src='./files/40.png'/>
+<p>A continuación, vamos al master y editamos el "site.pp" de la siguiente forma:</p>
+<img src='./files/48.png'/>
+<p>Seguidamente, editamos el archivo "C:\Windows\System32\drivers\etc\hosts" de nuestro cliente.</p>
+<img src='./files/43.png'/>
+<p>Tras esto, instalamos nuestro puppet client de windows y hacemos una prueba para ver si funciona correctamente los comando en el entorno windows:</p>
+<img src='./files/44.png'/>
+<p>A continuación, vamos al dominio de windows y lo denominamos "client2". Después, vamos a nuestro master y consultamos las peticiones pendiente de unión al master. Tras esto, aceptamos al nuevo cliente desde el master.</p>
+<img src='./files/45.png'/>
+<p>Tras aceptar al nuevo cliente desde el master, vamos a nuestro windows y hacemos la prueba.</p>
+<img src='./files/46.png'/>
+<p>Vemos que se ha generado correctamente y comprobamos si se ha creado el archivo de texto C:\warning.txt.</p>
+<img src='./files/49.png'/>
+</div>
+</div>
+</body>
+</html>
