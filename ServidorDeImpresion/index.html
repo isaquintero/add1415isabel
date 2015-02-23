@@ -1,0 +1,90 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>T&iacute;tulo del trabajo</title>
+</head>
+<body>
+<div style='display:table-row; padding: 10px;'>
+  <div style='float: left; width=20%; padding:10px;'>
+  <img src='./files/logo.png'/>
+  </div>
+  <div style='float: left;padding:10px'>
+  <ul>
+    <li><b>M&oacute;dulo:</b> <i>Administración de Sistemas Operativos</i></li>
+    <li><b>T&iacute;tulo del trabajo</b> <i>Servidor de Impresión.</i></li>
+    <li><b>Componentes del grupo:</b> <i>Isabel Quintero Sánchez.</i></li>
+    <li><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></li>
+    <li><b>Fecha de entrega:</b> <i>23 de Febrero de 2015</i></li>
+  </ul>
+  </div>
+</div>
+<div style='float: clear;background-color: #eeeeee; border:2px solid; border-radius:10px; padding: 10px;'>
+<a href='#bloque1'>Impresora Local compartida por red.</a> | <a href='#bloque2'>Acceso Web.</a> 
+</div>
+
+
+<h1><a id='bloque1'>Impresora Local compartida por red.</a></h1>
+
+<p>Para esta práctica utilizaremos dos MV Windows 2008 Server, donde realizaremos paso a paso que nos indica el enunciado de la práctica.</p>
+
+<p>En primer lugar, como no tenemos impresora física en clase, instalaremos el programa llamado PDFCreator. PDFCreator es una utilidad completamente gratuita con la que podremos crear archivos PDF desde
+ cualquier aplicación, desde el Bloc de notas hasta Word, Excel, etc. Este programa funciona simulando ser una impresora, de esta forma, instalando PDFCreator todas tus aplicaciones con opción para imprimir
+  te permitirán crear archivos PDF en cuestión de segundos.
+</p>
+
+<p>Para  probar la nueva impresora debemos abrir el Bloc de notas y creamos un fichero, luego seleccionamos imprimir y elegimos como impresora predeterminada el PDFCreator. Cuando finalice el proceso se abrirá 
+un fichero PDF (requiere que instales el Acrobat reader) con el resultado de la impresión:.</p>
+
+  <img src='./files/1.png'/>
+  <img src='./files/2.png'/>
+  <img src='./files/5.png'/>
+  
+<p>Instalación requerida de Adobe.</p>
+
+	  <img src='./files/3.png'/>
+  <img src='./files/4.png'/>
+	
+  
+  <p>Finalmente, compartimos la impresora en el servidor y como nombre del recurso compartido utilizaremos "PDFTuNombreTusApellidos".</p>
+  
+    <img src='./files/6.png'/>
+    
+
+<h1><a id='bloque2'>Acceso Web.</a></h1>
+
+<p>Analizaremos el modo en que los clientes de nuestra red se pueden conectar a las impresoras que se "ofrecen" en nuestro "Active Directory" y que se encuentran instaladas y accesibles. 
+Lo primero que realizaremos será configurar la impresión WEB en los clientes.</p>
+
+<p>Instalamos el Active directory, creando un nuevo bosque.</p>
+
+ <img src='./files/7.png'/>
+ <img src='./files/8.png'/>
+ 
+ <p>Luego, procedemos a la instalación de "Servicios de impresión y Documentos" e "Impresión en Internet".</p>
+ 
+  <img src='./files/9.png'/>
+  <img src='./files/10.png'/>
+
+<p>Ahora desde el equipo cliente Windows y el propio servidor, debemos acceder a la dirección "http://isabel.com/printers" para que aparezca en nuestro navegador un entorno que permite gestionar las 
+impresoras de dicho equipo.</p>
+
+<p>Accedemos desde el Servidor.</p>
+<img src='./files/11.png'/>
+
+<p>Accedemos desde el Cliente.</p>
+<img src='./files/12.png'/>
+
+<p>El siguiente paso será agregar nuestra impresora al Cliente para poder imprimir.</p>
+<img src='./files/13.png'/>
+
+<p>Luego, crearemos un nuevo documento de texto y le daremos a la opción de imprimir eligiendo la impresora anteriormente compartida.</p>
+<img src='./files/14.png'/>
+
+<p>Finalmente, en el servidor entramos en el navegador y ponemos el nombre de dominio o ip de la MV del servidor y pausamos las acciones de impresión y nos aparecerá el documento creado.</p>
+<img src='./files/15.png'/>
+
+<p>Una vez reaunadadas las acciones, abrimos el PDFCreator, guardamos el documento y se creará en formato PDF.</p>
+<img src='./files/16.png'/>
+
+</body>
+</html>
