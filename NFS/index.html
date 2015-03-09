@@ -1,0 +1,153 @@
+<html>
+<head>
+	<title>T&iacute;tulo del trabajo</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+</head>
+<body>
+<div style='display:table-row; padding: 10px;'>
+  <div style='float: left; width=20%; padding:10px;'>
+  <img src='./files/logo.png'/>
+  </div>
+  <div style='float: left;padding:10px'>
+  <ul>
+    <li><b>M&oacute;dulo:</b> <i>Aministración Sistemas Operativos</i></li>
+    <li><b>T&iacute;tulo del trabajo</b> <i>NFS</i></li>
+    <li><b>Componentes del grupo:</b> <i>Isabel Quintero Sánchez</i></li>
+    <li><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></li>
+    <li><b>Fecha de entrega:</b> <i>9 de Marzo de 2015.</i></li>
+  </ul>
+  </div>
+</div>
+<div style='float: clear;background-color: #eeeeee; border:2px solid; border-radius:10px; padding: 10px;'>
+<a href='#bloque1'>Introducción</a> | <a href='#bloque2'>SO Windows</a> | <a href='#final'>SO Linux.</a> </div>
+
+<h1><a id='bloque1'>Introducción</a></h1>
+
+<p>Las máquinas virtuales que vamos a utilizar son:</p>
+<li>Windows 2008 Server.</li>
+<li>Windows 7.</li>
+<li>Lubuntu.</li>
+<p>Debemos poner las MV en "modo puente". Las máquinas que actuen de servidor o aquellas a las que nos vamos a conectar de forma repetida deben tener IP estática.
+Las IP's que podemos usar son (si somos el alumno del puesto XX):</p>
+
+<h1><a id='bloque2'>SO Windows.</a></h1>
+
+<h3>Servidor NFS.</h3>
+
+<p>Accedemos a Windows 2008 Server como nuestro servidor NFS. Como nombre de la máquina pondremos "Quintero", grupo de trabajo "Aula108" y la ip "172.16.108.10".</p>
+
+<img src="./files/1.png"/>
+<img src="./files/1.1.png"/>
+
+<p>Luego procedemos a la instalación del servicio NFS, para ello agregamos el rol "Servidor de Archivos" y marcamos la casilla "Servidor para NFS".</p>
+
+<img src="./files/2.png"/>
+<img src="./files/3.png"/>
+
+<p>A continuación, creamos la carpeta "c:\export\public". Picar en la carpeta botón derecho propiedades -> Compartir NFS, y 
+configurarla para que sea accesible desde la red en modo lectura/escritura con NFS.</p>
+
+<img src="./files/4.png"/>
+
+<p>Creamos la carpeta "c:\export\private". Picar en la carpeta botón derecho propiedades -> Compartir NFS, y configurarla para que sea accesible desde la red sólo en modo sólo lectura.</p>
+<img src="./files/5.png"/>
+
+<h3>Cliente NFS.</h3>
+
+<p>Accedemos a Windows 7, como nombre de máquina pondremos "Quintero2", grupo de trabajo "Aula108" y la ip en DHCP.</p>
+
+<img src="./files/6.png"/><br>
+
+<img src="./files/7.png"/><br>
+
+<p>Después de haber hecho la configuración de la máquina, instalamos el componente cliente NFS para Windows, para ello vamos
+ a "Panel de Control -> Programas -> Activar o desactivar características de Windows".</p>
+<img src="./files/8.png"/><br>
+
+<p>Para iniciar el servicio NFS en el cliente, abrimos una consola con permisos de Administrador, y ejecutamos el siguiente comando: <i>nfsadmin client start</i>.</p>
+
+<img src="./files/9.png"/><br>
+
+<p>Ahora necesitamos montar el recurso remoto para poder trabajar con él. Para montar el recurso (esta vez no lo hacemos con Administrador) y escribimos: 
+<i>mount –o anon,nolock,r,casesensitive \\172.16.108.10\public *</i>.</p>
+<img src="./files/10.png"/>
+
+<p>Hacemos las comprobaciones.</p>
+<img src="./files/11.png"/>
+<img src="./files/13.png"/>
+
+<p>Creamos ficheros en el cliente y comprobamos si se han creado en el servidor. En el public se crean correctamente y en el private, como hemos configurado los permisos anteriormente, no nos deja 
+crear nada.</p>
+
+<img src="./files/12.png"/>
+<img src="./files/14.png"/>
+<img src="./files/15.png"/>
+
+<p>Desmontamos la unidad.</p>
+<img src="./files/16.png"/>
+
+
+<h1><a id='final'>SO Linux.</a></h1>
+
+<h3>Servidor Lubuntu.</h3>
+<p>Configuramos el archivo "/etc/network/interfaces" y en el archivo "/etc/hostname" ponemos el nombre del equipo como "quintero3".</p>
+
+<img src="./files/17.png"/>
+<img src="./files/18.png"/>
+
+<p>Instalamos el servicio NFS a través del comando "apt-get install".</p>
+<img src="./files/21.png"/>
+
+<p>Creamos las carpetas "public" y "private" con sus respectivos permisos.</p>
+<img src="./files/22.png"/>
+<img src="./files/23.png"/>
+
+<p>Vamos configurar el servidor NFS de la siguiente forma:
+
+   <li> La carpeta /var/export/public, será accesible desde toda la red en modo lectura/escritura.</li>
+   <li> La carpeta /var/export/private, sea accesible sólo desde la IP del cliente, sólo en modo lectura.</li>
+
+Para ello Modificamos el fichero "/etc/exports" añadiendo las siguientes líneas:</p>
+
+<img src="./files/24.png"/>
+
+<p>Iniciamos el servidor.</p>
+<img src="./files/25.png"/>
+
+<p>Hacemos la comprobación mostrando la lista de recursos exportados por el servidor NFS.</p>
+<img src="./files/26.png"/>
+
+<h3>Cliente Linux.</h3>
+
+<p>Configuramos el archivo "/etc/network/interfaces" y en el archivo "/etc/hostname" ponemos el nombre del equipo como "quintero4"</p>
+
+<img src="./files/19.png"/>
+<img src="./files/20.png"/>
+
+<p>Instalamos el paquete "nfs-common".</p>
+<img src="./files/26+.png"/>
+
+<p>Comprobamos el acceso desde el cliente al servidor mediante un ping.</p>
+<img src="./files/27.png"/>
+
+<p>También hacemos nmap + la ip del servidor: Sirve para escanear equipos remotos, y averiguar que servicios están ofreciendo al exterior.</p>
+<img src="./files/28.png"/>
+
+<p>showmount -e ip-del-servidor: Muestra la lista de recursos exportados por el servidor NFS.</p>
+<img src="./files/29.png"/>
+
+<p>Creamos las carpetas "public" y "private" montándolas en nuestras carpetas locales.</p>
+<img src="./files/30.png"/>
+
+<p>Ejecutar df -hT, y veremos que los recursos remotos están montados en nuestras carpetas locales. Observamos que solo se monta la primera que hemos ejecutado.</p>
+<img src="./files/32.png"/>
+
+<p>Acabamos de acceder a recursos remotos, realizando un montaje de forma manual, si queremos volver a acceder a los recursos remotos debemos repetir el proceso, a no ser que hagamos una configuración permanente o automática.
+Para configurar acciones de montaje autoḿaticos cada vez que se inicie el equipo, debemos modificar la configuración del fichero "/etc/fstab".</p>
+<img src="./files/33.png"/>
+
+<p>Hacemos la comprobación.</p>
+<img src="./files/34.png"/>
+</body>
+</html>
