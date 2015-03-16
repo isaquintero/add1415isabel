@@ -1,0 +1,136 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>T&iacute;tulo del trabajo</title>
+</head>
+<body>
+<div style='display:table-row; padding: 10px;'>
+  <div style='float: left; width=20%; padding:10px;'>
+  <img src='./files/logo.png'/>
+  </div>
+  <div style='float: left;padding:10px'>
+  <ul>
+    <li><b>M&oacute;dulo:</b> <i>Administración de Sistemas Operativos</i></li>
+    <li><b>T&iacute;tulo del trabajo</b> <i>Recursos compartidos Samba (SMB/CIFS).</i></li>
+    <li><b>Componentes del grupo:</b> <i>Isabel Quintero Sánchez.</i></li>
+    <li><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></li>
+    <li><b>Fecha de entrega:</b> <i>13 de Marzo de 2015</i></li>
+  </ul>
+  </div>
+</div>
+<div style='float: clear;background-color: #eeeeee; border:2px solid; border-radius:10px; padding: 10px;'>
+<a href='#bloque1'>1. SO GNU/Linux</a> | <a href='#bloque2'>2. Cliente Windows GUI</a> 
+</div>
+
+
+<h1><a id='bloque1'>1. SO GNU/Linux</a></h1>
+
+<p>Lo primero que debemos hacer es configurar la máquina que utilizaremos. Configuramos la red, el nombre de equipo e instalamos "openssh-server".</p>
+ <img src='./files/1.png'/>
+  <img src='./files/2.png'/>
+   <img src='./files/3.png'/>
+  
+  
+ 
+<h3>1.1 Preparativos Servidor Samba.</h3>
+
+<p>En primer lugar, creamos los usuarios "info1,info2 y supersamba" y, el grupo "informaticos".</p>
+
+  <img src='./files/4.png'/>
+ 
+ <p>Unimos los usuarios creados al grupos "informatico" también creado anteriormente.</p>
+  <img src='./files/5.png'/>
+  
+ <p>Luego, creamos los usuarios "pan1 y pan2" y el grupo "panaderos".</p> 
+  <img src='./files/6.png'/>
+  
+  <p>Dichos usuarios los unimos al grupo "panadero" y, también el usuario "supersamba".</p>
+   <img src='./files/7.png'/>
+  
+  
+  <p>A continuación, ceamos el usuario "smbguest", debemos asegurarnos que nadie puede usar smbguest para entrar en nuestra máquina mediante login, para ello
+  vamos a modificar en el fichero "/etc/passwd" de la siguiente manera:</p>
+  
+    <img src='./files/8.png'/>
+    
+    <p>Finalmente, creamos el grupo usuariosamba, y dentro de este ponemos a todos los panaderos, informaticos, supersamba y a smbguest.</p>
+    
+    <img src='./files/9.png'/>
+    <img src='./files/10.png'/>
+    
+<h3>Instalar y configurar Samba.</h3>
+    
+<p>Instalamos y configuramos el servidor Samba a través del comando "apt-get install".</p>
+	<img src='./files/11.png'/>
+
+<p>Luego, configuramos el servidor samba, para ello, renombramos el fichero de configuración existente, y trabajaremos a partir de un fichero de configuración nuevo vacío, esto lo hacemos a través del comando
+"mv /etc/samba/smb.conf /etc/samba/smb.conf.000". Creamos un fichero vacío "/etc/samba/smb.conf", y lo rellenamos con el contenido siguiente: </p>	
+	<img src='./files/12.png'/>
+	
+<p>Creamos las carpetas de los recursos compartidos con los permisos, y les ponemos los usuarios y grupos porpietarios.</p>	
+ <img src='./files/13.png'/>
+ <img src='./files/14.png'/>
+ 
+ <p>Finalente, añadimos los usuarios a Samba y, comprobamos la lista de usuarios Samba.</p>
+ 
+ <img src='./files/15.png'/>
+ <img src='./files/16.png'/>
+ 
+
+<p>Una vez terminada la configuración, reiniciamos el servicio.</p>
+	<img src='./files/17.png'/>
+
+<p>Verifica la sintaxis del fichero de configuración del servidor Samba.</p>
+<img src='./files/18.png'/>
+
+<p>Vemos que el servicio SMB/CIF está a la escucha.</p>
+<img src='./files/19.png'/>
+
+<h1><a id='bloque2'>2. Cliente Windows.</a></h1>
+
+<p>Desde un cliente Windows 7 tenemos que tratar de acceder a los recursos compartidos del servidor Samba.</p>
+<img src='./files/20.png'/>
+
+<p>Después de cada conexión se queda guardada la información en el cliente, lo comprobamos a través del comando "net use". Y, para comprobar los resultados desde el Servidor hacemos "smbstatus".</p>
+<img src='./files/21.png'/>
+<img src='./files/22.png'/>
+
+<h3>Cliente Windows comandos.</h3>
+
+<p>Para cerrar las conexión SMB/CIFS que ha realizado el cliente al servidor, usamos el comando: "C:>net use * /d /y".</p>
+<img src='./files/23.png'/>
+
+<p>Con el comando "net view", vemos las máquinas (con recursos CIFS) accesibles por la red.</p>
+<img src='./files/25.png'/>
+
+<p>Vamos a conectarnos desde la máquina Windows al servidor Samba usando los comandos net. Por ejemplo el comando "net use P: \\172.16.108.210\panaderos /USER:pan1" establece una conexión del 
+rescurso panaderos en la unidad P.</p>
+<img src='./files/26.png'/>
+
+<p>Ahora podemos entrar en la unidad P ("p:") y crear carpetas, etc. Y comprobamos que en el servidor se ha creado la carpeta.</p>
+<img src='./files/27.png'/>
+<img src='./files/31.png'/>
+
+<h3>Cliente Linux comandos.</h3>
+
+<p>Para empezar, creamos en local la carpeta "/mnt/samba-remoto/public" y "/mnt/samba-remoto/panaderos". Y, Con el usuario root, usamos el siguiente comando para montar un recurso compartido de Samba Server, 
+como si fuera una carpeta más de nuestro sistema: "mount -t cifs //172.16.108.210/panaderos /mnt/samba-remoto/panaderos -o username=pan1". </p>
+<img src='./files/34.png'/>
+<img src='./files/35.png'/>
+
+<p>Si montamos la carpeta de panaderos, lo que escribamos en "/mnt/samba-remoto/panaderos" debe aparecer en la máquina del servidor Samba, debemos comprobarlo.</p>
+<img src='./files/36.png'/>
+<img src='./files/37.png'/>
+
+<h3>Montaje automático.</h3>
+
+<p>lo que hemos hecho ha sido acceder de forma manual, esto conlleva a que cada vez que reiniciemos el equipo los montajes ya no estén establecidos. Lo que haremos será hacer los montajes de forma
+automática, para ello debemos añadir la siguiente línea al fichero "/etc/fstab".</p>
+<img src='./files/38.png'/>
+
+<p>Y, comprobamos que reiniciamos y no se desmonta lo que hemos montado anteriormente de forma automática.</p>
+<img src='./files/39.png'/>
+
+
+</body>
+</html>
