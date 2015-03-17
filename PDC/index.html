@@ -1,0 +1,127 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>T&iacute;tulo del trabajo</title>
+</head>
+<body>
+<div style='display:table-row; padding: 10px;'>
+  <div style='float: left; width=20%; padding:10px;'>
+  <img src='./files/logo.png'/>
+  </div>
+  <div style='float: left;padding:10px'>
+  <ul>
+    <li><b>M&oacute;dulo:</b> <i>Administración de Sistemas Operativos</i></li>
+    <li><b>T&iacute;tulo del trabajo</b> <i>Samba PDC.</i></li>
+    <li><b>Componentes del grupo:</b> <i>Isabel Quintero Sánchez.</i></li>
+    <li><b>Curso Acad&eacute;mico:</b> <i>2014/2015</i></li>
+    <li><b>Fecha de entrega:</b> <i>17 de Marzo de 2015</i></li>
+  </ul>
+  </div>
+</div>
+<div style='float: clear;background-color: #eeeeee; border:2px solid; border-radius:10px; padding: 10px;'>
+<a href='#bloque1'>1.PDC GNU/Linux</a> |
+</div>
+
+
+<h1><a id='bloque1'>1.PDC GNU/Linux</a></h1>
+
+<h3>1.1 PDC con Samba.</h3>
+
+<p>Lo primero que debemos hacer es configurar el fichero de configuración "/etc/samba/smb.conf" según la documentación proporcionada por el profesor, ya que Samba ya está instalado en nuestra máquina.</p>
+ <img src='./files/1.png'/>
+  <img src='./files/2.png'/>
+  
+ <p>Debemos asegurarnos de que existen todos los directorios nombrados en los recursos compartidos de la configuración Samba.</p>
+   <img src='./files/3.png'/>
+  <img src='./files/4.png'/>
+  
+
+<p>Luego, configuraremos la red del servidor Samba PDC de la siguiente forma:</p>
+ <ul>
+    <li>IP estática 172.16.108.210</li>
+    <li>Máscará 255.255.0.0</li>
+    <li>Gateway 172.16.1.1 </li>
+    <li>DNS1 127.0.0.1,</li>
+    <li>DNS2 172.16.1.1</li>
+  </ul>
+<img src='./files/5.png'/>
+
+<p>Luego, configuramos la máquina Windows 7 que actuará como cliente:</p>
+ <ul>
+    <li>IP estática 172.16.138.110</li>
+    <li>Máscara 255.255.0.0</li>
+    <li>Enlace 172.16.1.1 </li>
+    <li>DNS1 172.16.108.210</li>
+    <li>DNS2 172.16.1.1</li>
+  </ul>
+<img src='./files/6.png'/>
+
+<h3>1.2 Cuenta UNIX de máquina</h3>
+ 
+ <p>Creamos el grupo "machines" en el servidor.</p>
+  <img src='./files/10.png'/>
+  
+ <p>Luego, creamos las cuentas de máquina "client3" y "client4"..</p> 
+  <img src='./files/11.png'/>
+  
+  <p>Bloqueamos la cuenta Unix para evitar el acceso a una shell..</p>
+   <img src='./files/12.png'/>
+  
+ <h3>1.3 Cuenta Samba para la máquina</h3> 
+ 
+ <p>Vamos a crear la cuenta Samba de la máquina. La opcion –m indica que se trata de una cuenta de tipo máquina. </p>
+  <img src='./files/13.png'/>
+  
+  
+    <h3>1.4 Cuenta UNIX+Samba para cada usuario</h3> 
+    
+  <p>Debemos crear las cuentas Unix.</p>
+  <ul>
+    <li>Creamos el grupo "enterprise", con los usuarios "kirk", "spock", "sulu".</li>
+    <li>Creamos el grupo "borg" con los usuarios "borg1", "borg2" y "borg3".</li>
+  </ul>
+  
+    <img src='./files/14.png'/>
+    <img src='./files/15.png'/>
+ 
+    
+<p>Bloqueamos cada una de las cuentas unix creadas. </p>
+	<img src='./files/16.png'/>
+    
+<p>Creamos las cuentas Samba con cada uno de los usuarios creados y con el usuario root.</p>
+	<img src='./files/17.png'/>
+
+<p>Además es conveniente crear la carpeta del perfil de cada usuario y poner los permisos correspondientes. </p>	
+	<img src='./files/18+.png'/>
+	
+	 <h3>1.5 Unir un Cliente Windows al dominio </h3> 
+	 
+<p>Debemos poner como nombre del equipo "client310".</p>	
+ <img src='./files/9.png'/>
+
+ <p>Como a la hora de unir al dominio nos daba error, hemos buscado información y encontrado que tenemos que entrar en "Ejecutar -> rgedit" y añadir las siguientes claves en 
+ "[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\LanmanWorkstation\Parameters]": "DomainCompatibilityMode"=dword:00000001" y "DNSNameResolutionRequired"=dword:00000000".</p>
+ 
+ <img border='1px' src='./files/21.png'/>
+ 
+ <p>Y, alterar las claves que se encuentran en "[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Netlogon\Parameters]": "RequireSignOnSeal"=dword:00000000" y "RequireStrongKey"=dword:00000000".</p>
+ <img border='1px' src='./files/22.png'/>
+ 
+
+<p>Una vez hecho esto, vamos a "Equipo -> Propiedades -> Configuración Avanzada" y en dominio ponemos el nombre que hemos definido en el servidor para unirnos. Vemos que se une correctamente y sin fallos.</p>
+	<img border='1px' src='./files/23.png'/>
+
+<p>Para hacer la comprobación, reiniciamos el equipo y ahora, iniciamos sesión con un usuario de los creado anteriormente y unidos a Samba, por ejemplo, "sulu".</p>
+<img border='1px' src='./files/24.png'/>
+
+<img border='1px' src='./files/25.png'/>
+
+<p>Aclaraciones:</p>
+ <ul>
+    <li>En la práctica pone que hay que entregar el fichero de configuración "smb.conf", en mi caso, he puesto las capturas de pantalla de dicho fichero al principio.</li>
+    <li>Luego, hay alguna captura que sale que hay otro equipo que actúa como cliente, pero finalmente solo hemos utilizado uno por falta de tiempo y por lo que nos ha dicho el profesor.</li>
+    <li>También, aparece que hay que entregar un archivo txt con los fallos encontrados y cómo los hemos resuelto, por lo que lo he puesto y explicado en la práctica para subir un único fichero.</li>
+  </ul>
+
+</body>
+</html>
